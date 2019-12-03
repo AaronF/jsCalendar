@@ -57,11 +57,11 @@ var jsCalendar = (function(){
         // Set date
         this._setDate(
             (args.date !== null) ? args.date :
-            (this._target.dataset.hasOwnProperty('date')) ? this._target.dataset.date :
+            (typeof this._target.dataset !== "undefined" && this._target.dataset.hasOwnProperty('date')) ? this._target.dataset.date :
             new Date()
         );
         // If invalid date
-        if (!this._now) throw new Error('jsCalendar: Date is outside range.');
+        if (typeof this._now !== "undefined" && !this._now) throw new Error('jsCalendar: Date is outside range.');
         // Extensions call init
         this.extensionsCall('init', []);
         // Create
@@ -228,7 +228,7 @@ var jsCalendar = (function(){
                 options[item] = doptions[item];
             }
             // Dataset options
-            else if (this._target.dataset.hasOwnProperty(item)) {
+            else if (typeof this._target.dataset !== "undefined" && this._target.dataset.hasOwnProperty(item)) {
                 options[item] = this._target.dataset[item];
             }
         }
@@ -238,7 +238,7 @@ var jsCalendar = (function(){
         if (doptions.hasOwnProperty(item)) {
             options[item] = doptions[item];
         }
-        else if (this._target.dataset.hasOwnProperty(item)) {
+        else if (typeof this._target.dataset !== "undefined" && this._target.dataset.hasOwnProperty(item)) {
             options[item] = this._target.dataset[item];
         }
 
